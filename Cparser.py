@@ -73,7 +73,8 @@ class Cparser(object):
 
     def p_inits(self, p):
         """inits : inits ',' init"""
-        p[0] = InitList(p[1].init_list.append(p[3]))
+
+        p[0] = InitList(p[1].init_list + [p[3]])
 
     def p_single_init(self, p):
         """inits : init """

@@ -66,7 +66,7 @@ class TreePrinter:
         print(l * "| " + "FUNDEF")
         print((l + 1) * "| " + self.funname)
         print((l + 1) * "| " + "RET " + self.rettype)
-        for agr in self.arg_list:
+        for arg in self.arg_list:
             print((l + 1) * "| " + "ARG " + arg)
         self.instructions.printTree(l + 1)
 
@@ -79,7 +79,7 @@ class TreePrinter:
     @addToClass(AST.DeclarationList)
     def printTree(self, l):
         print(l * "| " + "DECL")
-        for dec in seld.dec_list:
+        for dec in self.dec_list:
             dec.printTree(l + 1)
 
     @addToClass(AST.Declaration)
