@@ -61,7 +61,7 @@ class Cparser(object):
 
     def p_declaration(self, p):
         """declaration : TYPE inits ';'"""
-        p[0] = Declaration(p[0], p[1])
+        p[0] = Declaration(p[1], p[2])
 
     def p_error_declaration(self, p):
         """declaration : error ';'"""

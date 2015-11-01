@@ -20,6 +20,8 @@ class Program(Node):
         self.fundefs_opt = fundefs_opt
         self.instructions_opt = instructions_opt
 
+        self.printTree(0)
+
 
 class Const(Node):
 
@@ -126,7 +128,7 @@ class Arg(Node):
 
     def __init__(self, argtype, argname):
         self.type = argtype
-        self.name = argname
+        self.argname = argname
 
 
 class ArgsList(Node):
