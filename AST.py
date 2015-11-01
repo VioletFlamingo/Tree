@@ -174,3 +174,10 @@ class ExpressionIdWithList(Node):
     def __init__(self, name, expr_list):
         self.name = name
         self.expr_list = expr_list
+
+
+class Compound_instr(Node):
+
+    def __init__(self, declarations, instructions):
+        self.declarations = declarations
+        self.instructions = instructions

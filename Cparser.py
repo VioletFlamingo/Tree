@@ -48,7 +48,7 @@ class Cparser(object):
 
     def p_declarations(self, p):
         """declarations : declarations declaration"""
-        p[0] = DeclarationList(p[1].dec_list.append(p[2]))
+        p[0] = DeclarationList(p[1].dec_list + [p[2]])
 
     def p_no_declarations(self, p):
         """declarations : """
@@ -104,7 +104,7 @@ class Cparser(object):
 
     def p_instructions(self, p):
         """instructions : instructions instruction"""
-        p[0] = InstructionList(p[1].instr_list.append(p[2]))
+        p[0] = InstructionList(p[1].instr_list + [p[2]])
 
     def p_sinle_instruction(self, p):
         """instructions : instruction """
@@ -200,7 +200,7 @@ class Cparser(object):
 
     def p_compound_instr(self, p):
         """compound_instr : '{' declarations instructions_opt '}' """
-        p[0] = Compund_instr(p[2], p[3])
+        p[0] = Compound_instr(p[2], p[3])
 
 
     def p_condition(self, p):
@@ -281,7 +281,7 @@ class Cparser(object):
 
     def p_expr_list(self, p):
         """expr_list : expr_list ',' expression"""
-        p[0] = ExprList(p[1].expr_list.append(p[3]))
+        p[0] = ExprList(p[1].expr_list + [p[3]])
 
     def p_single_expr(self, p):
         """expr_list : expression """
@@ -307,7 +307,7 @@ class Cparser(object):
 
     def p_fundefs(self, p):
         """fundefs : fundefs fundef"""
-        p[0] = FunctionList(p[1].fun_list.append(p[2]))
+        p[0] = FunctionList(p[1].fun_list + [p[2]])
 
     def p_single_fundef(self, p):
         """fundefs : fundef """
@@ -337,7 +337,7 @@ class Cparser(object):
 
     def p_args_list(self, p):
         """args_list : args_list ',' arg"""
-        p[0] = ArgsList(p[1].args_list.append(p[3]))
+        p[0] = ArgsList(p[1].args_list + [p[3]])
 
     def p_single_arg_list(self, p):
         """args_list : arg """

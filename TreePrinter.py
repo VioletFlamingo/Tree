@@ -141,3 +141,8 @@ class TreePrinter:
     def printTree(self, l):
         print(l * "| " + self.name)
         self.expr_list.printTree(l)
+
+    @addToClass(AST.Compound_instr)
+    def printTree(self, l):
+        self.declarations.printTree()
+        self.instructions.printTree()
