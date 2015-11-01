@@ -12,6 +12,7 @@ class BinExpr(Node):
         self.left = left
         self.right = right
 
+
 class Program(Node):
 
     def __init__(self, declarations, fundefs_opt, instructions_opt):
@@ -19,10 +20,12 @@ class Program(Node):
         self.fundefs_opt = fundefs_opt
         self.instructions_opt = instructions_opt
 
+
 class Const(Node):
-    
+
     def __init__(self, value):
         self.value = value
+
 
 class Integer(Const):
     pass
@@ -42,8 +45,6 @@ class String(Const):
 class Variable(Node):
     pass
     #...
-
-
 
 
 # ...
@@ -95,10 +96,12 @@ class Init(Node):
         self.name = name
         self.value = value
 
+
 class DeclarationList(Node):
 
     def __init__(self, dec_list):
         self.dec_list = dec_list
+
 
 class Declaration(Node):
 
@@ -106,15 +109,18 @@ class Declaration(Node):
         self.type = type
         self.inits = inits
 
+
 class InitList(Node):
 
     def __init__(self, init_list):
         self.init_list = init_list
 
+
 class InstructionList(Node):
 
     def __init__(self, instr_list):
         self.instr_list = instr_list
+
 
 class Arg(Node):
 
@@ -122,25 +128,30 @@ class Arg(Node):
         self.type = argtype
         self.name = argname
 
+
 class ArgsList(Node):
 
     def __init__(self, args_list):
         self.args_list = args_list
+
 
 class FunctionList(Node):
 
     def __init__(self, fun_list):
         self.fun_list = fun_list
 
+
 class ExprList(Node):
 
     def __init__(self, expr_list):
         self.expr_list = expr_list
 
+
 class PrintInstr(Node):
 
     def __init__(self, expr_list):
         self.expr_list = expr_list
+
 
 class ChoiceInstr(Node):
 
@@ -149,12 +160,14 @@ class ChoiceInstr(Node):
         self.instruction = instruction
         self.else_instruction = else_instruction
 
+
 class WhileInstr(Node):
 
     def __init__(self, instr_type, condition, instruction):
         self.instr_type = instr_type
         self.condition = condition
-        self.instruction = instruction 
+        self.instruction = instruction
+
 
 class ExpressionIdWithList(Node):
 
