@@ -127,6 +127,7 @@ class Cparser(object):
         p[0] = p[1]
 
 
+
 # print_instr
 
     def p_print_instr(self, p):
@@ -183,7 +184,7 @@ class Cparser(object):
 
     def p_repeat_instr(self, p):
         """repeat_instr : REPEAT instructions UNTIL condition ';' """
-        p[0] = WhileInstr("Repeat", p[5], p[3])
+        p[0] = WhileInstr("Repeat", p[4], p[2])
 
     def p_return_instr(self, p):
         """return_instr : RETURN expression ';' """

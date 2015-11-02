@@ -20,17 +20,21 @@ class TreePrinter:
     @addToClass(AST.BinExpr)
     def printTree(self, l):
         print(l * "| " + self.op)
-        self.left.printTree(l + 1)
-        self.right.printTree(l + 1)
+        if (isinstance(self.left, str)):
+            print((l+1) * "| " + self.left)
+        else:
+            self.left.printTree(l + 1)
+
+        if (isinstance(self.right, str)): 
+            print((l+1) * "| " + self.right)  
+        else:                 
+            self.right.printTree(l + 1)
 
     @addToClass(AST.Program)
     def printTree(self, l):
-        print(l * "| " + "DECLARATIONS")
-        self.declarations.printTree(l + 1)
-        print(l * "| " + "FUNCTIONS")
-        self.fundefs_opt.printTree(l + 1)
-        print(l * "| " + "INSTRUCTIONS")
-        self.instructions_opt.printTree(l + 1)
+        self.declarations.printTree(l)
+        self.fundefs_opt.printTree(l)
+        self.instructions_opt.printTree(l)
 
     @addToClass(AST.Const)
     def printTree(self, l):
@@ -46,12 +50,18 @@ class TreePrinter:
     def printTree(self, l):
         print(l * "| " + "=")
         print((l + 1) * "| " + self.variable)
-        self.expression.printTree(l + 1)
+        if (isinstance(self.expression, str)):
+            print((l+1)* "| " + self.expression)
+        else:
+            self.expression.printTree(l + 1)
 
     @addToClass(AST.Return)
     def printTree(self, l):
         print(l * "| " + "RETURN")
-        self.expression.printTree(l + 1)
+        if (isinstance(self.expression, str)):
+            print((l+1)* "| " + self.expression)
+        else:
+            self.expression.printTree(l + 1)
 
     @addToClass(AST.KeyWord)
     def printTree(self, l):
@@ -73,13 +83,13 @@ class TreePrinter:
     def printTree(self, l):
         print(l * "| " + "=")
         print((l + 1) * "| " + self.name)
-        print((l + 1) * "| " + self.value)
+        self.value.printTree(l+1)
 
     @addToClass(AST.DeclarationList)
     def printTree(self, l):
-        print(l * "| " + "DECL")
+        print(l * "| " +"DECL")
         for dec in self.dec_list:
-            dec.printTree(l + 1)
+            dec.printTree(l+1)
 
     @addToClass(AST.Declaration)
     def printTree(self, l):
@@ -98,7 +108,7 @@ class TreePrinter:
     # to check
     @addToClass(AST.Arg)
     def printTree(self, l):
-        print(self.type + " " + self.argname)
+        print(l*"| " + "ARG " + self.argname)
 
     @addToClass(AST.ArgsList)
     def printTree(self, l):
@@ -113,7 +123,10 @@ class TreePrinter:
     @addToClass(AST.ExprList)
     def printTree(self, l):
         for expr in self.expr_list:
-            expr.printTree(l)
+            if (isinstance(expr, str)):
+                print(l * "| " + expr)
+            else:
+                expr.printTree(l)
 
     @addToClass(AST.PrintInstr)
     def printTree(self, l):
@@ -132,7 +145,7 @@ class TreePrinter:
     @addToClass(AST.WhileInstr)
     def printTree(self, l):
         print(l * "| " + self.instr_type)
-        self.condition.printTree(l)
+        self.condition.printTree(l+1)
         self.instruction.printTree(l)
 
     @addToClass(AST.ExpressionIdWithList)
@@ -142,5 +155,5 @@ class TreePrinter:
 
     @addToClass(AST.Compound_instr)
     def printTree(self, l):
-        self.declarations.printTree()
-        self.instructions.printTree()
+        self.declarations.printTree(l)
+        self.instructions.printTree(l)
