@@ -14,18 +14,18 @@ class Cparser(object):
     tokens = Scanner.tokens
 
     precedence = (
-       ("nonassoc", 'IFX'),
-       ("nonassoc", 'ELSE'),
-       ("right", '='),
-       ("left", 'OR'),
-       ("left", 'AND'),
-       ("left", '|'),
-       ("left", '^'),
-       ("left", '&'),
-       ("nonassoc", '<', '>', 'EQ', 'NEQ', 'LE', 'GE'),
-       ("left", 'SHL', 'SHR'),
-       ("left", '+', '-'),
-       ("left", '*', '/', '%'),
+        ("nonassoc", 'IFX'),
+        ("nonassoc", 'ELSE'),
+        ("right", '='),
+        ("left", 'OR'),
+        ("left", 'AND'),
+        ("left", '|'),
+        ("left", '^'),
+        ("left", '&'),
+        ("nonassoc", '<', '>', 'EQ', 'NEQ', 'LE', 'GE'),
+        ("left", 'SHL', 'SHR'),
+        ("left", '+', '-'),
+        ("left", '*', '/', '%'),
     )
 
     def p_error(self, p):
@@ -87,7 +87,6 @@ class Cparser(object):
 
 # END inits
 
-
     def p_init(self, p):
         """init : ID '=' expression """
         p[0] = Init(p[1], p[3])
@@ -132,7 +131,6 @@ class Cparser(object):
         p[0] = p[1]
 
 
-
 # print_instr
 
     def p_print_instr(self, p):
@@ -145,11 +143,9 @@ class Cparser(object):
 
 # END print_instr
 
-
     def p_labeled_instr(self, p):
         """labeled_instr : ID ':' instruction """
         p[0] = Labeled_instr(p[1], p[3])
-
 
     def p_assignment(self, p):
         """assignment : ID '=' expression ';' """
@@ -186,7 +182,6 @@ class Cparser(object):
 
 # END while_instr
 
-
     def p_repeat_instr(self, p):
         """repeat_instr : REPEAT instructions UNTIL condition ';' """
         p[0] = RepeatInstr(p[4], p[2])
@@ -203,16 +198,13 @@ class Cparser(object):
         """break_instr : BREAK ';' """
         p[0] = KeyWord("break")
 
-
     def p_compound_instr(self, p):
         """compound_instr : '{' declarations instructions_opt '}' """
         p[0] = Compound_instr(p[2], p[3])
 
-
     def p_condition(self, p):
         """condition : expression"""
         p[0] = Condition(p[1])
-
 
     def p_const_I(self, p):
         """const : INTEGER"""

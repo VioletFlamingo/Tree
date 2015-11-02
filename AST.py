@@ -31,25 +31,19 @@ class Const(Node):
 
 class Integer(Const):
     pass
-    #...
 
 
 class Float(Const):
     pass
-    #...
 
 
 class String(Const):
     pass
-    #...
 
 
 class Variable(Node):
     pass
-    #...
 
-
-# ...
 
 class Labeled_instr(Node):
 
@@ -169,11 +163,13 @@ class WhileInstr(Node):
         self.condition = condition
         self.instruction = instruction
 
+
 class RepeatInstr(Node):
 
     def __init__(self, condition, instruction):
         self.condition = condition
         self.instruction = instruction
+
 
 class ExpressionIdWithList(Node):
 
@@ -187,6 +183,7 @@ class Compound_instr(Node):
     def __init__(self, declarations, instructions):
         self.declarations = declarations
         self.instructions = instructions
+
 
 class Id(Node):
 
