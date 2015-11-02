@@ -209,18 +209,17 @@ class Cparser(object):
         p[0] = Condition(p[1])
 
 
-    def p_const(self, p):
-        """const : INTEGER
-                 | FLOAT
-                 | STRING"""
-        if (p[1] == "INTEGER"):
-            p[0] = Integer(p[1])
-        elif (p[1] == "FLOAT"):
-            p[0] = Float(p[1])
-        else:
-            p[0] = String(p[1])
+    def p_const_I(self, p):
+        """const : INTEGER"""
+        p[0] = Integer(p[1])
 
+    def p_const_F(self, p):
+        """const : FLOAT"""
+        p[0] = Float(p[1])
 
+    def p_const_S(self, p):
+        """const : STRING"""
+        p[0] = String(p[1])
 # expression
 
     def p_expression(self, p):
@@ -228,9 +227,12 @@ class Cparser(object):
         p[0] = ExpressionIdWithList(p[1], p[3])
 
     def p_expression_const(self, p):
-        """expression : const
-                      | ID """
+        """expression : const """
         p[0] = p[1]
+
+    def p_expression_id(self, p):
+        """expression : ID """
+        p[0] = Id(p[1])
 
     def p_expression_with_par(self, p):
         """expression : '(' expression ')' """

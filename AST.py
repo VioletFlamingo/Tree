@@ -183,3 +183,8 @@ class Compound_instr(Node):
     def __init__(self, declarations, instructions):
         self.declarations = declarations
         self.instructions = instructions
+
+class Id(Node):
+
+    def __init__(self, name):
+        self.name = name

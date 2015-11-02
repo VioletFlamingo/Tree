@@ -20,15 +20,8 @@ class TreePrinter:
     @addToClass(AST.BinExpr)
     def printTree(self, l):
         print(l * "| " + self.op)
-        if (isinstance(self.left, str)):
-            print((l+1) * "| " + self.left)
-        else:
-            self.left.printTree(l + 1)
-
-        if (isinstance(self.right, str)): 
-            print((l+1) * "| " + self.right)  
-        else:                 
-            self.right.printTree(l + 1)
+        self.left.printTree(l + 1)
+        self.right.printTree(l + 1)
 
     @addToClass(AST.Program)
     def printTree(self, l):
@@ -159,3 +152,7 @@ class TreePrinter:
     def printTree(self, l):
         self.declarations.printTree(l)
         self.instructions.printTree(l)
+
+    @addToClass(AST.Id)
+    def printTree(self, l):
+        print(l*("| ") + self.name)
