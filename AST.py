@@ -157,7 +157,7 @@ class PrintInstr(Node):
 
 class ChoiceInstr(Node):
 
-    def __init__(self, condition, instruction, else_instruction):
+    def __init__(self, condition, instruction, else_instruction=None):
         self.condition = condition
         self.instruction = instruction
         self.else_instruction = else_instruction

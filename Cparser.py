@@ -50,7 +50,10 @@ class Cparser(object):
 
     def p_declarations(self, p):
         """declarations : declarations declaration"""
-        p[0] = DeclarationList(p[1].dec_list + [p[2]])
+        if p[2]:
+            p[0] = DeclarationList(p[1].dec_list + [p[2]])
+        else:
+            p[0] = p[1]
 
     def p_no_declarations(self, p):
         """declarations : """
@@ -264,7 +267,7 @@ class Cparser(object):
     def p_expression_err(self, p):
         """expression : ID '(' error ')'
                       | '(' error ')'"""
-        self.handle_error('Expr', p[3])
+        self.handle_error('Expr', p[2])
 
 # END expression
 
