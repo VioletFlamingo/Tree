@@ -5,10 +5,6 @@ from AST import *
 import TreePrinter
 
 
-def printError(line_no):
-    print("Error in line {0}".format(line_no))
-
-
 class Cparser(object):
 
     def __init__(self):
@@ -33,11 +29,17 @@ class Cparser(object):
     )
 
     def p_error(self, p):
-        if p:
-            print("Syntax error at line {0}, column {1}: LexToken({2}, '{3}')".format(
-                p.lineno, self.scanner.find_tok_column(p), p.type, p.value))
+        if not p:
+            print('Syntax error at end of input')
         else:
-            print("Unexpected end of input")
+            pass
+
+    def handle_error(self, type, p):
+        print("Syntax error at line {0}, column {1}: LexToken({2}, '{3}')"
+              .format(p.lineno,
+                      self.scanner.find_tok_column(p),
+                      p.type,
+                      p.value))
 
     def p_program(self, p):
         """program : declarations fundefs_opt instructions_opt"""
@@ -65,7 +67,7 @@ class Cparser(object):
 
     def p_error_declaration(self, p):
         """declaration : error ';'"""
-        # DRUKUJ BLAD
+        self.handle_error('declaration', p[1])
 
 # END declaration
 
@@ -136,7 +138,7 @@ class Cparser(object):
 
     def p_print_instr_err(self, p):
         """print_instr : PRINT error ';' """
-        # DRUKUJ BLAD
+        self.handle_error('print', p[2])
 
 # END print_instr
 
@@ -164,7 +166,7 @@ class Cparser(object):
     def p_error_choice_instr(self, p):
         """choice_instr : IF '(' error ')' instruction  %prec IFX
                         | IF '(' error ')' instruction ELSE instruction """
-        # DRUKUJ BLAD
+        self.handle_error('IF', p[3])
 
 # END choice)instr
 
@@ -173,11 +175,11 @@ class Cparser(object):
 
     def p_while_instr(self, p):
         """while_instr : WHILE '(' condition ')' instruction """
-        p[0] = WhileInstr("While", p[3], p[5])
+        p[0] = WhileInstr("WHILE", p[3], p[5])
 
     def p_error_while_instr(self, p):
         """while_instr : WHILE '(' error ')' instruction """
-        # DRUKUJ BLAD
+        self.handle_error('while', p[3])
 
 # END while_instr
 
@@ -262,7 +264,7 @@ class Cparser(object):
     def p_expression_err(self, p):
         """expression : ID '(' error ')'
                       | '(' error ')'"""
-        # DRUKUJ BLAD
+        self.handle_error('Expr', p[3])
 
 # END expression
 
