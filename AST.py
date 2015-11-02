@@ -165,11 +165,15 @@ class ChoiceInstr(Node):
 
 class WhileInstr(Node):
 
-    def __init__(self, instr_type, condition, instruction):
-        self.instr_type = instr_type
+    def __init__(self, condition, instruction):
         self.condition = condition
         self.instruction = instruction
 
+class RepeatInstr(Node):
+
+    def __init__(self, condition, instruction):
+        self.condition = condition
+        self.instruction = instruction
 
 class ExpressionIdWithList(Node):
 

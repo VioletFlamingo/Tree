@@ -178,7 +178,7 @@ class Cparser(object):
 
     def p_while_instr(self, p):
         """while_instr : WHILE '(' condition ')' instruction """
-        p[0] = WhileInstr("WHILE", p[3], p[5])
+        p[0] = WhileInstr(p[3], p[5])
 
     def p_error_while_instr(self, p):
         """while_instr : WHILE '(' error ')' instruction """
@@ -189,7 +189,7 @@ class Cparser(object):
 
     def p_repeat_instr(self, p):
         """repeat_instr : REPEAT instructions UNTIL condition ';' """
-        p[0] = WhileInstr("Repeat", p[4], p[2])
+        p[0] = RepeatInstr(p[4], p[2])
 
     def p_return_instr(self, p):
         """return_instr : RETURN expression ';' """

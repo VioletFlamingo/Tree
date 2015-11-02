@@ -138,8 +138,15 @@ class TreePrinter:
 
     @addToClass(AST.WhileInstr)
     def printTree(self, l):
-        print(l * "| " + self.instr_type)
+        print(l * "| " + "WHILE")
         self.condition.printTree(l+1)
+        self.instruction.printTree(l+1)
+
+    @addToClass(AST.RepeatInstr)
+    def printTree(self, l):
+        print(l * "| " + "REPEAT")
+        self.condition.printTree(l+1)
+        print(l * "| " + "UNTIL")
         self.instruction.printTree(l+1)
 
     @addToClass(AST.ExpressionIdWithList)
