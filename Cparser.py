@@ -173,7 +173,7 @@ class Cparser(object):
 
     def p_while_instr(self, p):
         """while_instr : WHILE '(' condition ')' instruction """
-        p[0] = WhileInstr("While", p[3], [5])
+        p[0] = WhileInstr("While", p[3], p[5])
 
     def p_error_while_instr(self, p):
         """while_instr : WHILE '(' error ')' instruction """
